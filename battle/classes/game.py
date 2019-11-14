@@ -56,6 +56,7 @@ class Person:
 
     def choose_action(self):
         i = 1
+        print({"\n" + bcolors.BOLD + self.name + bcolors.ENDC})
         print(bcolors.OKBLUE + bcolors.BOLD + "Actions" + bcolors.ENDC)
         for item in self.actions:
             print(str(i) + ":", item)
@@ -80,7 +81,8 @@ class Person:
                 print("     " +str(i) + "." + item.name, ":" , item.description, "(x5)")
                 i += 1
 
-
+        def get_stats(self):
+            print("")
 
 
 

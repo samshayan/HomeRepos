@@ -2,6 +2,10 @@ from classes.game import Person, bcolors
 from classes.magic import Spell
 from classes.inventory import Item
 
+print("\n\n")
+print("NAME        HP                          MP")
+print("                    __________________               ________________")
+print("Valos:460/460      |                   |   65/65     |               |")
 # Create Black Magic
 fire = Spell("Fire", 10, 100, "black")
 thunder = Spell("Thunder", 10, 100, "black")
@@ -30,8 +34,11 @@ player_items = [{"items":potion,"quantity":15}, {"items":hipotion,"quantity":5}
                 {"items":hielixer,"quantity":2}, {"items":grenade,"quantity":5}, ]
 
 # Instantiate People
-player = Person(460, 65, 60, 34, player_spells, player_items)
-enemy = Person(1200, 65, 45, 25, [], [])
+
+player1 = Person("Valos", 3260, 65, 60, 34, player_spells, player_items)
+player2 = Person("Nick", 4130, 65, 60, 34, player_spells, player_items)
+player3 = Person("Robot", 3089, 65, 60, 34, player_spells, player_items)
+enemy = Person("Mangus",1200, 65, 45, 25, [], [])
 
 running = True
 i = 0
@@ -40,6 +47,13 @@ print(bcolors.FAIL + bcolors.BOLD + "AN ENEMY ATTACKS!" + bcolors.ENDC)
 
 while running:
     print("=============================")
+
+    print("\n\n")
+    player("NAME                    HP                                  MP")
+    for player in players:
+        print("\n\n")
+        player.get_stats()
+        print("\n")
     player.choose_action()
     choice = input("Choose action:")
     index = int(choice) - 1
@@ -102,8 +116,6 @@ while running:
     print("______________________________")
     print("Enemy HP:", bcolors.FAIL + str(enemy.get_hp()) + "/" + str(enemy.get_max_hp()) + bcolors.ENDC + "\n")
 
-    print("Your HP:" , bcolors.OKGREEN + str(player.get_hp()) + "/" + str(player.get_max_hp()) + bcolors.ENDC)
-    print("Your MP:", bcolors.OKBLUE + str(player.get_mp()) + "/" + str(player.get_max_mp()) + bcolors.ENDC + "\n")
 
     if enemy.get_hp() == 0:
         print(bcolors.OKGREEN + "You win!" + bcolors.ENDC)
