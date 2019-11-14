@@ -25,7 +25,9 @@ grenade = Item("Grenade", "attack", "Deals 500 damage", 500)
 
 
 player_spells = [fire, thunder, blizzard, meteor, cure, cura]
-player_items = [potion, hipotion, superpotion, elixer, hielixer, grenade]
+player_items = [{"items":potion,"quantity":15}, {"items":hipotion,"quantity":5}
+                ,{"items":superpotion,"quantity":5},{"items":elixer,"quantity":5},
+                {"items":hielixer,"quantity":2}, {"items":grenade,"quantity":5}, ]
 
 # Instantiate People
 player = Person(460, 65, 60, 34, player_spells, player_items)
@@ -75,11 +77,22 @@ while running:
         if item_choice == -1:
             continue
 
-        item = player_items[item_choice]
+        item = player.items[item_choice]["item"]
+        player.items[item_choice]["quantity"] -= 1
+
+        if player.items[item_choice]["quantity"] == 0:
 
         if item.type == "potion":
             player_heal(item.prop)
             print(bcolors.OKGREEN + "\n" + item.name + " heals for", str)
+        elif item.type == "elixer":
+            player.hp = player.maxhp
+            player.mp = player.maxmp
+            print(bcolors.OKGREEN + "\n" + item.name + " fully restored HP/MP" + bcolors.ENDC)
+        else item.type == "attack":
+            enemy.take_damage(item.prop)
+            print(bcolors.FAIL + "\n" + item.name + " deals ", str(item.prop), "points of damage" + bcolors.ENDC)
+
     enemy_choice = 1
 
     enemy_dmg = enemy.generate_damage()
